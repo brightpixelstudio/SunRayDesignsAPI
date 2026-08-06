@@ -70,5 +70,20 @@ namespace SunRayDesignsAPI.Controllers
             return Ok(getquoteitems);
         }
 
+        [HttpGet(Name = "Industry")]
+        public async Task<ActionResult<IEnumerable<Industry>>> GetIndustries()
+        {
+            // MySQL utilizes the 'CALL' syntax
+            var getindustryitems = await _context.Industry
+                .FromSqlRaw("CALL GetIndustry()")
+                .ToListAsync();
+
+            if (getindustryitems.Count == 0)
+                return NotFound();
+
+            // return results
+            return Ok(getindustryitems);
+        }
+
     }
 }

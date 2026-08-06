@@ -10,5 +10,6 @@
         public DbSet<Work> Work { get; set; }
         public DbSet<Technology> Technology{ get; set; }
         public DbSet<Quote> Quote { get; set; }
+        public DbSet<Industry> Industry { get; set; }
     }
 }
