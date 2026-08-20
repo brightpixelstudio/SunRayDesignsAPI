@@ -9,7 +9,10 @@
 
         public DbSet<Work> Work { get; set; }
         public DbSet<Technology> Technology{ get; set; }
-        public DbSet<Quote> Quote { get; set; }
         public DbSet<Industry> Industry { get; set; }
+        public DbSet<Quote> Quote { get; set; }
+        public DbSet<GetAllBlogPosts> GetAllBlogPosts { get; set; }
+        public DbSet<GetAllPostsCountByYear> GetAllPostsCountByYear { get; set; }
+        public DbSet<GetBlogPostsBasedOnTypeAndYear> GetBlogPostsBasedOnTypeAndYear { get; set; }
     }
 }
