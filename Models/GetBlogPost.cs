@@ -2,12 +2,12 @@
 
 namespace SunRayDesignsAPI.Models
 {
-    public class GetBlogPostsBasedOnTypeAndYear
+    public class GetBlogPost
     {
         [Key]
         public int blogpostid { get; set; }
         public string? title { get; set; }
-        public string? summary { get; set; }
+        public string? content { get; set; }
         public string? url { get; set; }
         public DateTime dateposted { get; set; }
         public string? author { get; set; }

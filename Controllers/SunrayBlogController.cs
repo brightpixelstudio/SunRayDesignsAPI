@@ -28,7 +28,7 @@ namespace SunRayDesignsAPI.Controllers
                 .ToListAsync();
 
             if (getallblogpostsitems.Count == 0)
-                return NotFound();
+                return NotFound(new { Message = "Get All Blog Posts Not Found" });
 
             // return results
             return Ok(getallblogpostsitems);
@@ -46,7 +46,7 @@ namespace SunRayDesignsAPI.Controllers
                 .ToListAsync();
 
             if (getallpostscountbyyear.Count == 0)
-                return NotFound();
+                return NotFound(new { Message = "Get All Posts Count By Year Not Found" });
 
             // return results
             return Ok(getallpostscountbyyear);
@@ -65,11 +65,27 @@ namespace SunRayDesignsAPI.Controllers
                 .ToListAsync();
 
             if (getblogpostsbasedontypeandyearitems.Count == 0)
-                return NotFound();
+                return NotFound(new { Message = "Get Blog Posts Based On Type And Year Not Found" });
 
             // return results
             return Ok(getblogpostsbasedontypeandyearitems);
         }
 
+        [HttpGet(Name = "GetBlogPost")]
+        public IActionResult GetBlogPost(int blogpostid)
+        {
+            // Define the parameter to prevent SQL Injection
+            var blogpostparam = new MySqlParameter("@blogpostid", blogpostid);
+
+            // MySQL utilizes the 'CALL' syntax
+            var getblogpostitem = _context.GetBlogPost
+                .FromSqlRaw("CALL GetBlogPost({0})", blogpostparam);
+
+            if (getblogpostitem == null)
+                return NotFound(new { Message = "Post not found" });
+
+            // return results
+            return Ok(getblogpostitem);
+        }
     }
 }

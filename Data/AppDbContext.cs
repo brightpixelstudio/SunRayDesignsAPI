@@ -14,5 +14,6 @@
         public DbSet<GetAllBlogPosts> GetAllBlogPosts { get; set; }
         public DbSet<GetAllPostsCountByYear> GetAllPostsCountByYear { get; set; }
         public DbSet<GetBlogPostsBasedOnTypeAndYear> GetBlogPostsBasedOnTypeAndYear { get; set; }
+        public DbSet<GetBlogPost> GetBlogPost { get; set; }
     }
 }
