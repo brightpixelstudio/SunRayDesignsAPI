@@ -34,34 +34,35 @@ namespace SunRayDesignsAPI.Controllers
             return Ok(getallblogpostsitems);
         }
 
-        [HttpGet(Name = "GetAllPostsCountByYear")]
-        public async Task<ActionResult<IEnumerable<GetAllPostsCountByYear>>> GetAllPostsCountByYear(int yearparam)
+        [HttpGet(Name = "GetAllPostsCountByYearByMonth")]
+        public async Task<ActionResult<IEnumerable<GetAllPostsCountByYearByMonth>>> GetAllPostsCountByYearByMonth(int yearparam)
         {
             // Define the parameter to prevent SQL Injection
             var yearParam = new MySqlParameter("@yearparam", yearparam);
 
             // MySQL utilizes the 'CALL' syntax
-            var getallpostscountbyyear = await _context.GetAllPostsCountByYear
-                .FromSqlRaw("CALL GetAllPostsCountByYear({0})", yearParam)
+            var getallpostscountbyyearbymonth = await _context.GetAllPostsCountByYearByMonth
+                .FromSqlRaw("CALL GetAllPostsCountByYearByMonth({0})", yearParam)
                 .ToListAsync();
 
-            if (getallpostscountbyyear.Count == 0)
+            if (getallpostscountbyyearbymonth.Count == 0)
                 return NotFound(new { Message = "Get All Posts Count By Year Not Found" });
 
             // return results
-            return Ok(getallpostscountbyyear);
+            return Ok(getallpostscountbyyearbymonth);
         }
 
         [HttpGet(Name = "GetBlogPostsBasedOnTypeAndYear")]
-        public async Task<ActionResult<IEnumerable<GetBlogPostsBasedOnTypeAndYear>>> GetBlogPostsBasedOnTypeAndYear(int? typeparam, int yearparam)
+        public async Task<ActionResult<IEnumerable<GetBlogPostsBasedOnTypeAndYear>>> GetBlogPostsBasedOnTypeAndYear(int yearparam, int? typeparam, int? monthparam)
         {
             // Define the parameter to prevent SQL Injection
-            var typeParamIn = new MySqlParameter("@typeparam", typeparam);
             var yearParamIn = new MySqlParameter("@yearparam", yearparam);
+            var typeParamIn = new MySqlParameter("@typeparam", typeparam);
+            var monthParamIn = new MySqlParameter("@monthparam", monthparam);
 
             // MySQL utilizes the 'CALL' syntax
             var getblogpostsbasedontypeandyearitems = await _context.GetBlogPostsBasedOnTypeAndYear
-                .FromSqlRaw("CALL GetBlogPostsBasedOnTypeAndYear({0}, {1})", typeParamIn, yearParamIn)
+                .FromSqlRaw("CALL GetBlogPostsBasedOnTypeAndYear({0}, {1}, {2})", yearParamIn, typeParamIn, monthParamIn)
                 .ToListAsync();
 
             if (getblogpostsbasedontypeandyearitems.Count == 0)
@@ -72,10 +73,10 @@ namespace SunRayDesignsAPI.Controllers
         }
 
         [HttpGet(Name = "GetBlogPost")]
-        public IActionResult GetBlogPost(int blogpostid)
+        public IActionResult GetBlogPost(string url)
         {
             // Define the parameter to prevent SQL Injection
-            var blogpostparam = new MySqlParameter("@blogpostid", blogpostid);
+            var blogpostparam = new MySqlParameter("@url", url);
 
             // MySQL utilizes the 'CALL' syntax
             var getblogpostitem = _context.GetBlogPost
@@ -87,5 +88,65 @@ namespace SunRayDesignsAPI.Controllers
             // return results
             return Ok(getblogpostitem);
         }
+
+        [HttpGet(Name = "GetAllBlogPostYears")]
+        public IActionResult GetAllBlogPostYears()
+        {
+            // MySQL utilizes the 'CALL' syntax
+            var getblogpostyearsitems = _context.GetAllBlogPostYears
+                .FromSqlRaw("CALL GetAllBlogPostYears()");
+
+            if (getblogpostyearsitems == null)
+                return NotFound(new { Message = "Blog post years not found" });
+
+            // return results
+            return Ok(getblogpostyearsitems);
+        }
+
+        [HttpGet(Name = "GetAllBlogTypes")]
+        public IActionResult GetAllBlogTypes()
+        {
+            // MySQL utilizes the 'CALL' syntax
+            var getblogtypesitems = _context.GetAllBlogTypes
+                .FromSqlRaw("CALL GetAllBlogTypes()");
+
+            if (getblogtypesitems == null)
+                return NotFound(new { Message = "Blog post types not found" });
+
+            // return results
+            return Ok(getblogtypesitems);
+        }
+
+        [HttpGet(Name = "GetLatestBlogPosts")]
+        public IActionResult GetLatestBlogPosts()
+        {
+            // MySQL utilizes the 'CALL' syntax
+            var getlatestblogpostsitems = _context.GetLatestBlogPosts
+                .FromSqlRaw("CALL GetLatestBlogPosts()");
+
+            if (getlatestblogpostsitems == null)
+                return NotFound(new { Message = "Blog latest post not found" });
+
+            // return results
+            return Ok(getlatestblogpostsitems);
+        }
+
+        [HttpGet(Name = "GetAllPostsCountByYearByCategory")]
+        public IActionResult GetAllPostsCountByYearByCategory(int yearparam)
+        {
+            // Define the parameter to prevent SQL Injection
+            var yearparamin = new MySqlParameter("@yearparam", yearparam);
+
+            // MySQL utilizes the 'CALL' syntax
+            var getallpostscountbyyearbycategoryitems = _context.GetAllPostsCountByYearByCategory
+                .FromSqlRaw("CALL GetAllPostsCountByYearByCategory({0})", yearparamin);
+
+            if (getallpostscountbyyearbycategoryitems == null)
+                return NotFound(new { Message = "Blog categories not found" });
+
+            // return results
+            return Ok(getallpostscountbyyearbycategoryitems);
+        }
+
     }
 }

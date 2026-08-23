@@ -2,11 +2,12 @@
 
 namespace SunRayDesignsAPI.Models
 {
-    public class GetAllPostsCountByYear
+    public class GetAllPostsCountByYearByMonth
     {
         [Key]
-        public string? month { get; set; }
+        public string? monthname { get; set; }
         public int year { get; set; }
+        public int month { get; set; }
         public int count { get; set; }
     }
 }
