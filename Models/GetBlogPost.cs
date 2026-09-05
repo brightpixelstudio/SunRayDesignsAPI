@@ -12,5 +12,7 @@ namespace SunRayDesignsAPI.Models
         public DateTime dateposted { get; set; }
         public string? author { get; set; }
         public string? category { get; set; }
+        public int blogtypeid { get; set; }
+
     }
 }
