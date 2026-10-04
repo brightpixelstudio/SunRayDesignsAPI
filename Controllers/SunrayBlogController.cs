@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SunRayDesignsAPI.Controllers
 {
+    // Controller for handling blog-related API endpoints
     [ApiController]
     [Route("[controller]/[action]")] // Adds the method name to the URL path
     public class SunrayBlogController : ControllerBase
