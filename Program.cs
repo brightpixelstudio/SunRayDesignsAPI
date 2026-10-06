@@ -34,7 +34,7 @@ builder.Services.AddControllers();
 var app = builder.Build();
 
 app.UseCors("AllowAngular"); // Place this before UseAuthorization
-app.UseCors("AngularApp");
+app.UseCors("AllowSunRayDesigns");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
