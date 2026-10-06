@@ -18,10 +18,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AngularApp", policy =>
+    options.AddPolicy("AllowSunRayDesigns", policy =>
     {
         policy.WithOrigins(
-            "https://green-glacier-09c41de10.3.azurestaticapps.net",
+            "https://www.sunraydesigns.org",
             "http://localhost:4200"
         )
         .AllowAnyHeader()
